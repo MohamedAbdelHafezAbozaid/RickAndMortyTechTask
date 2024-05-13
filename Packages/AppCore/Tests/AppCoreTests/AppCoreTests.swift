@@ -7,8 +7,8 @@ import class AppCore.RemoteCharactersLoader
 
 final class AppCoreTests: XCTestCase {
     
-    func test_UseCase_fetchingDataCountSuccessFully() {
-        runAsyncTest { [weak self] in
+    func test_UseCase_fetchingDataCountSuccessFully() async  {
+        await runAsyncTest { [weak self] in
             // Arrange
             guard let strongSelf = self else { return }
             let sut = strongSelf.makeSUT()
@@ -19,8 +19,8 @@ final class AppCoreTests: XCTestCase {
         }
     }
     
-    func test_UseCase_fetchingPainatedDataCountSuccessFully() {
-        runAsyncTest { [weak self] in
+    func test_UseCase_fetchingPainatedDataCountSuccessFully() async {
+        await runAsyncTest { [weak self] in
             // Arrange
             var fetchedCharacters = [MainCharacter]()
             guard let strongSelf = self else { return }
@@ -35,8 +35,8 @@ final class AppCoreTests: XCTestCase {
         }
     }
     
-    func test_UseCase_mapFetchDataSuccessFully() {
-        runAsyncTest { [weak self] in
+    func test_UseCase_mapFetchDataSuccessFully() async {
+        await runAsyncTest { [weak self] in
             // Arrange
             guard let strongSelf = self else { return }
             let sut = strongSelf.makeSUT()
@@ -50,8 +50,8 @@ final class AppCoreTests: XCTestCase {
         }
     }
     
-    func test_UseCase_FetchFilteredUnKnowenDataSuccessFully() {
-        runAsyncTest { [weak self] in
+    func test_UseCase_FetchFilteredUnKnowenDataSuccessFully() async {
+        await runAsyncTest { [weak self] in
             // Arrange
             guard let strongSelf = self else { return }
             let sut = strongSelf.makeSUT()
@@ -64,8 +64,8 @@ final class AppCoreTests: XCTestCase {
         }
     }
     
-    func test_UseCase_FetchFilteredDeadDataSuccessFully() {
-        runAsyncTest { [weak self] in
+    func test_UseCase_FetchFilteredDeadDataSuccessFully() async {
+        await runAsyncTest { [weak self] in
             // Arrange
             guard let strongSelf = self else { return }
             let sut = strongSelf.makeSUT()
