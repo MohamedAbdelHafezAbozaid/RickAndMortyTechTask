@@ -11,29 +11,29 @@ import struct Commons.MainCharacter
 import protocol AppCore.CharactersLoaderRepositoryProtocol
 
 public enum AppRoute: Hashable {
-    case DetailsScreen(character: MainCharacter)
+    case DetailsScreen(mainNav: NavigationStateProtocol,character: MainCharacter)
     
     public static func == (lhs: AppRoute, rhs: AppRoute) -> Bool {
         switch (lhs, rhs) {
-        case let (.DetailsScreen(character1), .DetailsScreen(character2)):
+        case let (.DetailsScreen(_, character1), .DetailsScreen(_, character2)):
             return character1.id == character2.id
         }
     }
     
     public func hash(into hasher: inout Hasher) {
         switch self {
-        case let .DetailsScreen(character):
-            hasher.combine(character.id) 
+        case let .DetailsScreen(_ ,character):
+            hasher.combine(character.id)
         }
     }
 }
 
-extension AppRoute: View, MainDependancyContainer {
+extension AppRoute: View {
     
     public var body: some View {
         switch self {
-        case let .DetailsScreen(character):
-            dependancyCreator(view: .DetailsScreen(character: character))
+        case let .DetailsScreen(mainNav ,character):
+            AppScreens.dependancyCreator(view: .DetailsScreen(mainNav: mainNav, character: character))
         }
     }
 }

@@ -10,9 +10,12 @@ import protocol CharactersList.DetailsScreenRouterProtocol
 
 class DetailsScreenRouter: DetailsScreenRouterProtocol {
 
-    let nav = NavigationState.shared
+    let mainNav: NavigationStateProtocol
+    init(mainNav: NavigationStateProtocol) {
+        self.mainNav = mainNav
+    }
     func goBack() {
-        nav.goBack() 
+        mainNav.goBack() 
     }
 }
 

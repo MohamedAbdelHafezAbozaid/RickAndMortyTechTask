@@ -16,35 +16,35 @@ import class AppCore.RemoteCharactersLoader
 
 
 public enum AppViews {
-    case listScreen
-    case DetailsScreen(character: MainCharacter)
+    case listScreen(mainNav: NavigationStateProtocol)
+    case DetailsScreen(mainNav: NavigationStateProtocol, character: MainCharacter)
 }
 
 
 public protocol MainDependancyContainer {
-    associatedtype T: View
+    associatedtype Body: View
     @ViewBuilder
-    func dependancyCreator(view: AppViews) -> T
+    static func dependancyCreator(view: AppViews) -> Body
 }
 
-extension MainDependancyContainer {
+public class AppScreens: MainDependancyContainer {
     @MainActor
-    public func dependancyCreator(view: AppViews) -> some View {
+    public static func dependancyCreator(view: AppViews) -> some View {
         Group {
             switch view {
-            case .listScreen:
+            case let .listScreen(mainNav):
                 CharacterListView(
                     viewModel: VMCreator.ListViewModel(
-                        loader: RemoteCharactersLoader() 
+                        loader: RemoteCharactersLoader()
                     ),
-                    router: ListScreenRouter()
+                    router: ListScreenRouter(mainNav: mainNav)
                 )
-            case let .DetailsScreen(character):
+            case let .DetailsScreen(mainNav, character):
                 CharacterDetailsView(
                     viewModel: VMCreator.CharacterViewModel(
                         character: character
                     ),
-                    router: DetailsScreenRouter()
+                    router: DetailsScreenRouter(mainNav: mainNav)
                 )
             }
         }

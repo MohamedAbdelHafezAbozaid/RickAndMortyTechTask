@@ -6,18 +6,13 @@
 //
 
 import SwiftUI
-import protocol Router.MainDependancyContainer
-import class Router.NavigationState
+import struct Router.AppNavHandler
 
 @main
-struct RickAndMortyTechTaskApp: App, MainDependancyContainer {
-    @StateObject private var navigationState = NavigationState.shared
+struct RickAndMortyTechTaskApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationStack(path: $navigationState.appRoutes) {
-                dependancyCreator(view: .listScreen)
-                    .navigationsConfig()
-            }
+            AppNavHandler()
         }
     }
 }

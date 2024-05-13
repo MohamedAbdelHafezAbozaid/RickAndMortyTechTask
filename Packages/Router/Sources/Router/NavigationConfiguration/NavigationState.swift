@@ -12,12 +12,9 @@ public protocol NavigationStateProtocol {
     func goBack()
 }
 
-public final class NavigationState: NavigationStateProtocol , ObservableObject {
+ public final class NavigationState: NavigationStateProtocol , ObservableObject {
     
     @Published public var appRoutes: [Route] = []
-    
-    public static let shared = NavigationState()
-    private init() {}
     
     public func goTo(_ route:Route) { 
         Task {
@@ -35,6 +32,7 @@ public final class NavigationState: NavigationStateProtocol , ObservableObject {
         }
     }
 }
+
 
 
 

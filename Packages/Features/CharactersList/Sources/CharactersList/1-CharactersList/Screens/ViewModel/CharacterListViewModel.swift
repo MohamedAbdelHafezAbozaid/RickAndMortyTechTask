@@ -63,6 +63,4 @@ public final class CharacterListViewModel: BaseViewModel {
             dataStatus = .failure(.invalidData)
         }
     }
-    
-    
 }

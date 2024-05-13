@@ -11,8 +11,11 @@ import struct Commons.MainCharacter
 
 class ListScreenRouter: ListScreenRouterProtocol {
     
-    let nav = NavigationState.shared
+    let mainNav: NavigationStateProtocol
+    init(mainNav: NavigationStateProtocol) {
+        self.mainNav = mainNav
+    }
     func openDetails(character: MainCharacter) {
-        nav.goTo(.app(.DetailsScreen(character: character))) 
+        mainNav.goTo(.app(.DetailsScreen(mainNav: mainNav, character: character)))
     }
 }
