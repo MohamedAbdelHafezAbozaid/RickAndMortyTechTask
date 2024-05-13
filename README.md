@@ -10,7 +10,7 @@ Application is a modular Swift package providing a user interface for interactin
 
 ### Technologies Used
 
-- SwiftUI: Provides the primary user interface framework for building the application.
+- SwiftUI / UIKit: Provides the primary user interface framework for building the application.
 - Combine: Used for handling asynchronous events and data streams.
 - async/await: Utilized for asynchronous programming to simplify and streamline asynchronous code.
 
@@ -28,7 +28,8 @@ Unit testing is implemented for the UseCases within the AppCore Swift package, e
 ## Requirements
 
 - Swift 5.5+
-- iOS 16.0+ 
+- iOS 16.0+
+- Xcode 15.3
 
 ## Installation
 Open Xcode.
