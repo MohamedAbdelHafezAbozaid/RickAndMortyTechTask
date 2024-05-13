@@ -39,7 +39,6 @@ extension HTTPClient {
     fileprivate func handleNetworkResponse<T: Codable>(_ response: URLResponse, _ data: Data, model: T.Type) throws -> T {
         guard let response = response as? HTTPURLResponse else {throw Error.badRequest}
         let statusCode = response.statusCode
-        print("StatusCode: \(statusCode)")
         switch response.statusCode {
         case 200...299:
             return try map(data, model: T.self)
@@ -57,7 +56,6 @@ extension HTTPClient {
     private func map<T: Codable>(_ data: Data, model: T.Type) throws -> T {
         do {
             let jsonData = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-            print(jsonData as Any)
             let obj:T = try JSONDecoder().decode(T.self, from: data)
             return obj
         }catch let error {
