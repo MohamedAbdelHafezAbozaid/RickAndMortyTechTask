@@ -16,7 +16,7 @@ public struct NavigationModifier: ViewModifier {
 }
 
 public extension View {
-    func navigationsConfig(showConnectionIndicator: Bool = false) -> some View {
+    func navigationsConfig() -> some View {
         self.modifier(NavigationModifier()) 
     }
 }

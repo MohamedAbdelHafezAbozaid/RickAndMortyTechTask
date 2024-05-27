@@ -12,7 +12,7 @@ public protocol NavigationStateProtocol {
     func goBack()
 }
 
- public final class NavigationState: NavigationStateProtocol , ObservableObject {
+public final class AppNavHandlerViewModel: NavigationStateProtocol , ObservableObject {
     
     @Published public var appRoutes: [Route] = []
     

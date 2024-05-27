@@ -18,7 +18,6 @@ public enum Route: View, Hashable, Equatable {
         }
     }
     
-    
     public var body: some View {
         switch self {
         case let .app(route):

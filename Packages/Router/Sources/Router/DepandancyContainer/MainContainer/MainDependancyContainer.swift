@@ -13,41 +13,45 @@ import struct CharactersList.CharacterDetailsView
 import protocol AppCore.CharactersLoaderRepositoryProtocol
 import class AppCore.RemoteCharactersLoader
 
+public typealias MainDependancyContainer = CharacterListViewContainer & DetailsScreenCreator
 
+//public protocol NeededInjection{
+//    var mainNav: any NavigationStateProtocol {get}
+//}
 
-public enum AppViews {
-    case listScreen(mainNav: NavigationStateProtocol)
-    case DetailsScreen(mainNav: NavigationStateProtocol, character: MainCharacter)
-}
-
-
-public protocol MainDependancyContainer {
-    associatedtype Body: View
+public protocol CharacterListViewContainer {
     @ViewBuilder
-    static func dependancyCreator(view: AppViews) -> Body
+    func characterListViewContainer(mainNav: NavigationStateProtocol) -> CharacterListView
 }
 
-public class AppScreens: MainDependancyContainer {
+extension CharacterListViewContainer {
     @MainActor
-    public static func dependancyCreator(view: AppViews) -> some View {
-        Group {
-            switch view {
-            case let .listScreen(mainNav):
-                CharacterListView(
-                    viewModel: VMCreator.ListViewModel(
-                        loader: RemoteCharactersLoader()
-                    ),
-                    router: ListScreenRouter(mainNav: mainNav)
-                )
-            case let .DetailsScreen(mainNav, character):
-                CharacterDetailsView(
-                    viewModel: VMCreator.CharacterViewModel(
-                        character: character
-                    ),
-                    router: DetailsScreenRouter(mainNav: mainNav)
-                )
-            }
-        }
+    public func characterListViewContainer(mainNav: NavigationStateProtocol) -> CharacterListView {
+        CharacterListView(
+            viewModel: VMCreator.ListViewModel(
+                loader: RemoteCharactersLoader()
+            ),
+            router: ListScreenRouter(mainNav: mainNav)
+        )
     }
 }
+
+public protocol DetailsScreenCreator {
+    @ViewBuilder
+    func detailsScreenCreator(mainNav: NavigationStateProtocol, character: MainCharacter) -> CharacterDetailsView
+}
+
+extension DetailsScreenCreator {
+    @MainActor
+    public func detailsScreenCreator(mainNav: NavigationStateProtocol, character: MainCharacter) -> CharacterDetailsView {
+        CharacterDetailsView(
+            viewModel: VMCreator.CharacterViewModel(
+                character: character
+            ),
+            router: DetailsScreenRouter(mainNav: mainNav)
+        )
+    }
+}
+
+
 

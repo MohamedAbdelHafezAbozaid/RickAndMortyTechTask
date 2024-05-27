@@ -8,12 +8,14 @@
 import SwiftUI
 
 public struct AppNavHandler: View {
-    @StateObject private var MainNav = NavigationState()
-    
+    @StateObject private var viewModel = AppNavHandlerViewModel()
+
     public init() {}
+    
     public var body: some View {
-        NavigationStack(path: $MainNav.appRoutes) {
-            AppScreens.dependancyCreator(view: .listScreen(mainNav: MainNav))
+        let firstView: AppRoute = .CharactersListScreen(mainNav: viewModel)
+        NavigationStack(path: $viewModel.appRoutes) {
+            firstView
                 .navigationsConfig()
         }
     }
