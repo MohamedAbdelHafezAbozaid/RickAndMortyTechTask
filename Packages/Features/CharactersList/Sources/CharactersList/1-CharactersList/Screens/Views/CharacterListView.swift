@@ -39,7 +39,7 @@ public struct CharacterListView: View {
                             height: geometry.size.height
                         )
                     ) { selectedCharacter in
-                        router.openDetails(character: selectedCharacter)
+                        router.openDetails(character: selectedCharacter, presentAs: .push)
                     }
                 }
             }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 public protocol NavigationStateProtocol {
+    var sheetCoordinator: SheetNavigationState<AppSheet> {get set}
     func goTo(_ route:Route)
     func goBack()
 }
@@ -15,6 +16,7 @@ public protocol NavigationStateProtocol {
 public final class AppNavHandlerViewModel: NavigationStateProtocol , ObservableObject {
     
     @Published public var appRoutes: [Route] = []
+    public var sheetCoordinator = SheetNavigationState<AppSheet>()
     
     public func goTo(_ route:Route) { 
         Task {

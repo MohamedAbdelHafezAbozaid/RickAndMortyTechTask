@@ -8,6 +8,11 @@
 import Foundation
 import struct Commons.MainCharacter
 
+public enum presentationType {
+    case push
+    case sheet
+}
+
 public protocol ListScreenRouterProtocol {
-    func openDetails(character: MainCharacter) 
+    func openDetails(character: MainCharacter, presentAs: presentationType)
 }

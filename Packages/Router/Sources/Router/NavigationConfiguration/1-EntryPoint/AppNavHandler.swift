@@ -17,6 +17,7 @@ public struct AppNavHandler: View {
         NavigationStack(path: $viewModel.appRoutes) {
             firstView
                 .navigationsConfig()
+                .sheetsConfig(nav: viewModel)
         }
     }
 }

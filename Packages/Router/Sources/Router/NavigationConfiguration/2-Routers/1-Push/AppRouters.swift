@@ -12,14 +12,14 @@ import protocol AppCore.CharactersLoaderRepositoryProtocol
 
 public enum AppRoute: Hashable {
     case CharactersListScreen(mainNav: NavigationStateProtocol)
-    case DetailsScreen(mainNav: NavigationStateProtocol, character: MainCharacter)
+    case Common(CommonRoute)
     
     public static func == (lhs: AppRoute, rhs: AppRoute) -> Bool {
         switch (lhs, rhs) {
         case (.CharactersListScreen, .CharactersListScreen):
             return true
-        case let (.DetailsScreen(_,character1), .DetailsScreen(_,character2)):
-            return character1.id == character2.id
+        case let (.Common(lhsCommon), .Common(rhsCommon)):
+            return lhsCommon == rhsCommon
         default:
             return false
         }
@@ -29,8 +29,8 @@ public enum AppRoute: Hashable {
         switch self {
         case .CharactersListScreen:
             hasher.combine(0)
-        case let .DetailsScreen(_,character):
-            hasher.combine(character.id)
+        case let .Common(commonRoute):
+            hasher.combine(commonRoute)
         }
     }
 }
@@ -41,8 +41,8 @@ extension AppRoute: View, MainDependancyContainer {
         switch self {
         case let .CharactersListScreen(mainNav):
             characterListViewContainer(mainNav: mainNav)
-        case let .DetailsScreen(mainNav,character):
-            detailsScreenCreator(mainNav: mainNav, character: character)
+        case let .Common(commonRoute):
+            commonRoute.body
         }
     }
 }
