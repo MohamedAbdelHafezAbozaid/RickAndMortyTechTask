@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public typealias MainDependancyContainer = CharacterListScreenContainer & DetailsScreenContaine
+public typealias MainDependancyContainer = CharacterListScreenContainer & DetailsScreenContainer
 
 
 
